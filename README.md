@@ -1,6 +1,6 @@
-# Thread-it  ** *UNDER CONSTRUCTION* **
+# Thread-it ** _UNDER CONSTRUCTION_ **
 
-## Reddit-style thread app with nested replies: NextJS, TailwindCSS, Prisma, SQLite: 
+## Reddit-style thread app with nested replies: NextJS, NextAuth, Next-UI, TailwindCSS, Prisma, Postgres:
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

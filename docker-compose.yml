@@ -1,0 +1,23 @@
+services:
+  thread-it-db:
+    image: postgres
+    container_name: thread-it-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER_FILE: /run/secrets/db_user
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_DB_FILE: /run/secrets/db_name
+    secrets:
+       - db_user
+       - db_password
+       - db_name
+
+secrets:
+  db_password:
+    file: ./secrets/postgres_password.txt
+  db_name:
+    file: ./secrets/postgres_db.txt
+  db_user:
+    file: ./secrets/postgres_user.txt
+  
