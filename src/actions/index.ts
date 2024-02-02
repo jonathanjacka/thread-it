@@ -2,8 +2,8 @@
 
 import * as authActions from '@/auth';
 
-export async function signIn(provider: string = 'github') {
-  return authActions.signIn(provider);
+export async function signIn() {
+  return authActions.signIn('github');
 }
 
 export async function signOut() {

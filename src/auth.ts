@@ -1,5 +1,4 @@
-import NextAuth, { type Session } from 'next-auth';
-import { AdapterUser } from '@auth/core/adapters';
+import NextAuth from 'next-auth';
 import Github from 'next-auth/providers/github';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { db } from '@/db';
@@ -21,8 +20,8 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     //current bug in next-auth where session.user.id is not set correctly
-    async session({session, user}: {session: Session, user: AdapterUser}) {
-      if(session && user && session.user) {
+    async session({session, user}: any) {
+      if(session && user) {
         session.user.id = user.id;
       }
       return session;
