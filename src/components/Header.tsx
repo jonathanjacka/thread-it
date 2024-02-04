@@ -6,11 +6,14 @@ import {
   NavbarItem,
   Input,
   Button,
-  Avatar
+  Avatar,
+  Popover,
+  PopoverTrigger,
+  PopoverContent
 } from '@nextui-org/react';
 
 import { auth } from '@/auth';
-import React from 'react';
+import * as actions from '@/actions';
 
 const Header = async () => {
 
@@ -19,24 +22,32 @@ const Header = async () => {
   let authContent: React.ReactNode;
   if(session?.user) {
     authContent = (
-      <NavbarItem className='flex justify-center align-middle gap-2'>
-        <Avatar src={session.user.image || ''} />
-        <form action='/api/auth/signout' method='post'>
-          <Button type='submit' color='default' variant='ghost'>Sign Out</Button>
-        </form>
-      </NavbarItem>
+      <Popover placement='left' >
+        <PopoverTrigger>
+          <Avatar src={session.user.image || ''} className='hover:cursor-pointer'/>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div className="p-4 flex flex-col justify-center align-middle gap-2">
+            {session.user.name}
+            <form action={actions.signOut} className='mx-auto'>
+              <Button type='submit' color='secondary' variant='bordered' >Sign Out</Button>
+            </form>
+          </div>
+          
+        </PopoverContent>
+      </Popover>
     )
   } else {
     authContent = (
       <>  
         <NavbarItem>
-          <form action='/api/auth/signin' method='post'>
+          <form action={actions.signIn}>
             <input type='text' name='provider' value='github' readOnly hidden />
             <Button type='submit' color='secondary' variant='bordered'>Sign in with Github</Button>
           </form>
         </NavbarItem>
         <NavbarItem>
-          <form action='/api/auth/signin' method='post'>
+          <form action={actions.signIn}>
             <input type='text' name='provider' value='github' readOnly hidden />
             <Button type='submit' color='primary' variant='flat'>Sign up with Github</Button>
           </form>
