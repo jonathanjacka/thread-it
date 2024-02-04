@@ -12,7 +12,8 @@ export default async function Home() {
   return (
     <div>
       <form action={actions.signIn}>
-        <Button type='submit'>Sign In</Button>
+        <input type='text' name='provider' value='github' readOnly hidden />
+        <Button type='submit'>Sign in with Github</Button>
       </form>
 
       <form action={actions.signOut}>
