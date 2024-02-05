@@ -2,6 +2,10 @@
 
 import { z } from 'zod';
 import { auth } from '@/auth';
+import type { Topic } from '@prisma/client';
+import { db } from '@/db';
+import paths from '@/paths';
+import { redirect } from 'next/navigation';
 
 interface createTopicFormState {
   errors: {
@@ -32,7 +36,30 @@ export const createTopic = async (formState: createTopicFormState, formData: For
     return { errors: { _form: ['You must be logged in to perform this action.'] } };
   }
 
-  return { errors: {}};
+  let topic: Topic;
+
+  
+  try {
+    topic = await db.topic.create({
+      data: {
+        slug: result.data.name,
+        description: result.data.description,
+      }
+    });
+
+  } catch (error) {
+    if(error instanceof Error) {
+      return { errors: {
+        _form: [error.message],
+      }}
+    } else {
+      return { errors: {
+        _form: ['An error occurred while creating the topic. Please try again.'],
+      } }
+    }
+  }
+
+  redirect(paths.topicShow(topic.slug));
   //TODO: Revalidate home page
 
 }
