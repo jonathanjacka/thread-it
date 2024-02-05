@@ -44,6 +44,11 @@ const TopicCreateForm = () => {
               isInvalid={!!formState.errors.description}
               errorMessage={formState.errors.description?.join(', ')}
             />
+            {formState.errors._form && 
+              <div className='p-2 text-small text-red-600 border rounded-xl bg-red-100'>
+                {formState.errors._form?.join(', ')}
+              </div>
+            }
             <Button type='submit' color='primary'>Create</Button>
           </div>
         </form>

@@ -1,11 +1,13 @@
 'use server';
 
 import { z } from 'zod';
+import { auth } from '@/auth';
 
 interface createTopicFormState {
   errors: {
     name?: string[],
     description?: string[],
+    _form?: string[],
   }
 }
 
@@ -23,6 +25,11 @@ export const createTopic = async (formState: createTopicFormState, formData: For
 
   if (!result.success) {
     return { errors: result.error.flatten().fieldErrors };
+  }
+
+  const session = await auth();
+  if(!session || !session.user) {
+    return { errors: { _form: ['You must be logged in to perform this action.'] } };
   }
 
   return { errors: {}};
