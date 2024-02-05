@@ -28,8 +28,22 @@ const TopicCreateForm = () => {
         <form action={action}>
           <div className="flex flex-col gap-4 p-4 w-80">
             <h3 className='text-lg'>Create New Topic</h3>
-            <Input name='name' label='Name' labelPlacement='outside' placeholder='Name' />
-            <Textarea name='description' label='Description' labelPlacement='outside' placeholder='Description' />
+            <Input 
+              name='name' 
+              label='Name' 
+              labelPlacement='outside' 
+              placeholder='Name' 
+              isInvalid={!!formState.errors.name}
+              errorMessage={formState.errors.name?.join(', ')}
+            />
+            <Textarea 
+              name='description' 
+              label='Description' 
+              labelPlacement='outside' 
+              placeholder='Description' 
+              isInvalid={!!formState.errors.description}
+              errorMessage={formState.errors.description?.join(', ')}
+            />
             <Button type='submit' color='primary'>Create</Button>
           </div>
         </form>
