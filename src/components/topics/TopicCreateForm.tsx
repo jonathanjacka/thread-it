@@ -1,9 +1,7 @@
 'use client';
 
 import { useFormState } from 'react-dom';
-
 import * as actions from '@/actions';
-
 import {
   Input,
   Button,
@@ -12,6 +10,7 @@ import {
   PopoverTrigger,
   PopoverContent
 } from '@nextui-org/react';
+import FormButton from '@/components/common/FormButton';
 
 const TopicCreateForm = () => {
 
@@ -49,7 +48,7 @@ const TopicCreateForm = () => {
                 {formState.errors._form?.join(', ')}
               </div>
             }
-            <Button type='submit' color='primary'>Create</Button>
+            <FormButton color='primary'>Create</FormButton>
           </div>
         </form>
       </PopoverContent>

@@ -37,8 +37,6 @@ export const createTopic = async (formState: createTopicFormState, formData: For
   }
 
   let topic: Topic;
-
-  
   try {
     topic = await db.topic.create({
       data: {
