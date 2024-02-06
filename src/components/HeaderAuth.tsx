@@ -19,16 +19,23 @@ const HeaderAuth = () => {
   let authContent: React.ReactNode;
 
   if(status === 'loading') {
-    authContent = null;
+    authContent = (
+      <Button variant='light' isLoading>
+      Loading...
+    </Button>   
+    );
   } else if(data?.user) {
     authContent = (
-      <Popover placement='left' >
+      <Popover placement='bottom'>
         <PopoverTrigger>
-          <Avatar src={data.user.image || ''} className='hover:cursor-pointer' />    
+          <Button variant='light'>
+            {data.user.name? data.user.name.split(' ')[0] : 'Signed In' }
+            <Avatar src={data.user.image || ''} className='hover:cursor-pointer' />
+          </Button>   
         </PopoverTrigger>
         <PopoverContent>
           <div className="p-4 flex flex-col justify-center align-middle gap-2">
-            {data.user.name}
+          {data.user.email}
             <form action={actions.signOut} className='mx-auto'>
               <Button type='submit' color='primary' variant='bordered' >Sign Out</Button>
             </form>

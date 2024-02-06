@@ -15,8 +15,8 @@ const Header = () => {
         <Link href='/' className='font-bold'>Thread-it</Link>
       </NavbarBrand>
 
-      <NavbarContent justify='center'>
-        <Input placeholder='Search' />
+      <NavbarContent justify='center' >
+        <Input  placeholder='Search' />
       </NavbarContent>
 
       <NavbarContent justify='end'>
