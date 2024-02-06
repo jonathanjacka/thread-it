@@ -40,7 +40,8 @@ export const createTopic = async (formState: createTopicFormState, formData: For
   try {
     topic = await db.topic.create({
       data: {
-        slug: result.data.name,
+        name: result.data.name,
+        slug: result.data.name.toLowerCase(),
         description: result.data.description,
       }
     });
