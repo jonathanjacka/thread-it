@@ -30,6 +30,15 @@ export const createPost = async (formState: CreatePostFormState, formData: FormD
   if (!result.success) {
     return { errors: result.error.flatten().fieldErrors };
   }
+
+  const session = await auth();
+  if(!session || !session.user) {
+    return  {
+      errors: {
+        _form: ['You must be signed in to create a post.']
+      }
+    }
+  } 
   
 
   //TODO: Revalidate topic show page, update home page?
