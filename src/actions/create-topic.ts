@@ -6,6 +6,7 @@ import type { Topic } from '@prisma/client';
 import { db } from '@/db';
 import paths from '@/paths';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 interface createTopicFormState {
   errors: {
@@ -58,7 +59,6 @@ export const createTopic = async (formState: createTopicFormState, formData: For
     }
   }
 
+  revalidatePath(paths.topicShow(topic.slug));
   redirect(paths.topicShow(topic.slug));
-  //TODO: Revalidate home page
-
 }

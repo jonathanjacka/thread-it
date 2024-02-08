@@ -52,10 +52,33 @@ export const createPost = async (slug: string, formState: CreatePostFormState, f
     }
   }
 
-  
-
-  //TODO: Revalidate topic show page, update home page?
-  return {
-    errors: {}
+  const postData = {
+    title: result.data.title,
+    content: result.data.content,
+    userId: session.user.id,
+    topicId: topic.id,
   }
+
+  let post: Post;
+  try {
+    post = await db.post.create({ data: postData });
+
+  } catch (error) {
+    if(error instanceof Error) {
+      return {
+        errors: {
+          _form: [error.message]
+        }}
+    } else {
+      return {
+        errors: {
+          _form: ['Failed to create post.']
+        }
+      }
+    }
+  }
+
+  //TODO: update home page?
+  revalidatePath(paths.topicShow(slug));
+  redirect(paths.postShow(slug, post.id));
 }
