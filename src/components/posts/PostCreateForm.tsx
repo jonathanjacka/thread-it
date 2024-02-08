@@ -12,9 +12,13 @@ import {
 import * as actions from '@/actions';
 import FormButton from '@/components/common/FormButton';
 
-const PostCreateForm = () => {
+interface PostCreateFormProps {
+  slug: string
+}
 
-  const [ formState, action ] = useFormState(actions.createPost, { errors: {}});
+const PostCreateForm = ({ slug }: PostCreateFormProps) => {
+
+  const [ formState, action ] = useFormState(actions.createPost.bind(null, slug), { errors: {}});
 
   return (
     <Popover placement='bottom'>
@@ -48,7 +52,7 @@ const PostCreateForm = () => {
                 {formState.errors._form?.join(', ')}
               </div>
             }
-            
+
             <FormButton color='primary'>
               Create Post
             </FormButton>

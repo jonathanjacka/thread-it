@@ -21,7 +21,7 @@ interface CreatePostFormState {
   }
 }
 
-export const createPost = async (formState: CreatePostFormState, formData: FormData): Promise<CreatePostFormState> => {
+export const createPost = async (slug: string, formState: CreatePostFormState, formData: FormData): Promise<CreatePostFormState> => {
   const result = createPostSchema.safeParse({
     title: formData.get('title'),
     content: formData.get('content'),
@@ -39,6 +39,19 @@ export const createPost = async (formState: CreatePostFormState, formData: FormD
       }
     }
   } 
+  
+  const topic = await db.topic.findFirst({
+    where: { slug }
+  })
+
+  if(!topic) {
+    return {
+      errors: {
+        _form: ['Cannot find topic.']
+      }
+    }
+  }
+
   
 
   //TODO: Revalidate topic show page, update home page?
