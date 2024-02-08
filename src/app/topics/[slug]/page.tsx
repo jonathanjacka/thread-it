@@ -12,7 +12,7 @@ const TopicShowPage = async ({ params }: TopicShowPageProps) => {
 
   const { slug } = params;
   const topicName = await fetchTopicNameBySlug(slug);
-  
+
   return (
     <div className='grid grid-cols-4 gap-4 p-4'>
       <div className="col-span-3">
