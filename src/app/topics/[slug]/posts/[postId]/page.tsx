@@ -1,7 +1,9 @@
-import PostShow from "@/components/posts/PostShow"
 import Link from 'next/link';
 import paths from '@/paths';
 import { Button } from "@nextui-org/react";
+
+import PostShow from "@/components/posts/PostShow";
+import CommentCreateForm from '@/components/comments/CommentCreateForm';
 
 interface ShowPostPageProps {
   params: {
@@ -18,6 +20,7 @@ const ShowPostPage = ( { params }: ShowPostPageProps ) => {
       </Link>
 
       <PostShow postId={params.postId} />
+      <CommentCreateForm postId={params.postId} startOpen/>
     </div>
   )
 }

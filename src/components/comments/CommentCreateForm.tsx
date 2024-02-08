@@ -3,7 +3,7 @@
 import { useFormState } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { Textarea, Button } from "@nextui-org/react";
-import FormButton from "@/components/common/form-button";
+import FormButton from "@/components/common/FormButton";
 import * as actions from "@/actions";
 
 interface CommentCreateFormProps {
@@ -51,14 +51,14 @@ export default function CommentCreateForm({
           </div>
         ) : null}
 
-        <FormButton>Create Comment</FormButton>
+        <FormButton color='primary'>Create Comment</FormButton>
       </div>
     </form>
   );
 
   return (
     <div>
-      <Button size="sm" variant="light" onClick={() => setOpen(!open)}>
+      <Button size="sm" color='primary' variant="light" onClick={() => setOpen(!open)}>
         Reply
       </Button>
       {open && form}
