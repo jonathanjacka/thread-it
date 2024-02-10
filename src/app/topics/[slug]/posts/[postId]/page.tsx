@@ -22,7 +22,7 @@ const ShowPostPage = ( { params }: ShowPostPageProps ) => {
 
       <PostShow postId={params.postId} />
       <CommentCreateForm postId={params.postId} startOpen/>
-      <CommentList fetchComments={ () => fetchCommentsByPostId(params.postId)} />
+      <CommentList postId={params.postId} />
     </div>
   )
 }
