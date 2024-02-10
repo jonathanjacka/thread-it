@@ -1,9 +1,13 @@
-import CommentShow from "@/components/comments/comment-show";
+import CommentShow from "@/components/comments/CommentShow";
+import type { CommentWithUser } from "@/db/queries/comments";
 
-interface CommentListProps {}
+interface CommentListProps {
+  fetchComments: () => Promise<CommentWithUser[]>
+}
 
-// TODO: Get a list of comments from somewhere
-export default function CommentList({}: CommentListProps) {
+
+export default async function CommentList({ fetchComments }: CommentListProps) {
+  const comments = await fetchComments();
   const topLevelComments = comments.filter(
     (comment) => comment.parentId === null
   );
